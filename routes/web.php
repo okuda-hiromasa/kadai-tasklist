@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    dd(100);
-    return view('welcome');
-});
 
 Route::get('/','TasksController@index');
 Route::resource ('tasks','TasksController');

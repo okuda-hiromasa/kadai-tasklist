@@ -10,9 +10,6 @@
      
 <table class="table table-stiped">
     <tr>
-        <th> {!! Form::label('title','タスク名:')!!}</th>
-        <td>{!! Form::text('title',null,['class'=>'btn btn-primay'])!!}</td>
-    <tr>
         <th>{!! Form::label('content','内容:')!!}</th>
         <td> {!! Form::text('content',null,['class'=>'btn btn-primay'])!!}</td>
     </tr>
