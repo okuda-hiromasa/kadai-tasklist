@@ -12,8 +12,11 @@
     <tr>
         <th>{!! Form::label('content','内容:')!!}</th>
         <td> {!! Form::text('content',null,['class'=>'btn btn-primay'])!!}</td>
+    <tr>
+        <th>{!! Form::label('status', 'ステータス:') !!}</th>
+        <td> {!! Form::text('status',null,['class'=>'btn btn-primay'])!!}</td>
     </tr>
-    
+                   
 </table>
  {!! Form::submit('更新',['class' => 'btn btn-primary'])!!}
     {!! Form::close()!!}
