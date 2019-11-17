@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    public function tasks()
+    {
+        //hasManyでUserモデル（１）がTaskモデル(多)を所有する。
+        //(「１対多」リレーションは一つのモデルが他の多くのモデルを所有する関係を定義)
+        return $this ->hasMany(Task::class);
+    }
 }

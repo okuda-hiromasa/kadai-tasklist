@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Task;
 
 class TasksController extends Controller
@@ -12,13 +13,19 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+public function index()
     {
-        //
+        //ログインの確認
+       if(\Auth::check()){
         $tasks = Task::all();
-
+        //ログイン時の処理
         return view('tasks.index', ['tasks' => $tasks,]);
+        }
+       return view('welcome');
+      
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -45,12 +52,17 @@ class TasksController extends Controller
             'status'=> 'required|max:10',
             'content'=> 'required|max:191',
             ]);
+            
         $task = new Task;
        
-        $task -> content = $request -> content;
-        $task -> status = $request -> status;
+        $task -> content = $request->content;
+        $task -> status = $request->status;
+        //Authでidを取得し、usre_idへ渡す
+        $task -> user_id=\Auth::id();
         $task -> save();
+        
         return redirect('/');
+        
     }
 
     /**
@@ -62,10 +74,12 @@ class TasksController extends Controller
     public function show($id)
     {
         //
-        $task = Task::find($id);
-        
-        return view('tasks.show',['task'=>$task,]);
+            
+            $task = Task::find($id);
+            return view('tasks.show',['task'=>$task,]);    
+            
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -98,6 +112,7 @@ class TasksController extends Controller
         $task = Task::find($id);
         $task -> content = $request -> content;
         $task -> status = $request -> status;
+        //$task -> user_id=\Auth::id();
         $task -> save();
         
         return redirect('/');
